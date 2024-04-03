@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eXpanses :{%block title%}{%endblock title%}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='./dist/output.css')}}">
+
+</head>
+<body>
+    <nav class=" bg-nav p-2 ">
+        <div class="container mx-auto flex items-center justify-between ">
+            <div >
+                <a class="text-3xl font-semibold  text-link hover:text-button "  href="#">Xpanses</a>
+            </div>
+            <div class="space-x-8 text-xl ">
+                    <a class="text-link  hover:text-opacity-70" href='#'>Home</a>
+                    <a class="text-link  hover:text-opacity-70"  href="#">Add Expanses</a>
+                    <a class="text-link  hover:text-opacity-70"  href="#">About</a>
+            </div>
+            <div class="bg-button py-1 px-4 hover:bg-button_hover rounded-md ">
+                <button class="text-lg font-semibold text-link">Login</button>
+            </div>
+        </div>
+    </nav>
+    <div class="">
+        {%block content%}{%endblock content%}
+    </div>
+
+</body>
+</html>
