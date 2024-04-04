@@ -3,29 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eXpanses :{%block title%}{%endblock title%}</title>
+    <title>Xpanses :{%block title%}{%endblock title%}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='./dist/output.css')}}">
+    <script src="https://kit.fontawesome.com/85d4076826.js" crossorigin="anonymous"></script>
 
 </head>
 <body>
-    <nav class=" bg-nav p-2 ">
+    <nav class=" bg-nav p-4">
         <div class="container mx-auto flex items-center justify-between ">
             <div >
                 <a class="text-3xl font-semibold  text-link hover:text-button "  href="#">Xpanses</a>
             </div>
             <div class="space-x-8 text-xl ">
-                    <a class="text-link  hover:text-opacity-70" href='#'>Home</a>
-                    <a class="text-link  hover:text-opacity-70"  href="#">Add Expanses</a>
-                    <a class="text-link  hover:text-opacity-70"  href="#">About</a>
+                    <a class="text-link  hover:text-opacity-70" href='{{url_for("pages.home")}}'>Home</a>
+                    <a class="text-link  hover:text-opacity-70"  href='#'>Add Expanses</a>
+                    <a class="text-link  hover:text-opacity-70"  href='{{url_for("pages.about")}}'>About</a>
             </div>
-            <div class="bg-button py-1 px-4 hover:bg-button_hover rounded-md ">
-                <button class="text-lg font-semibold text-link">Login</button>
+            <div class="bg-button py-1 px-4 rounded-md  ">
+                <button class="text-lg font-semibold text-link  ">Login</button>
             </div>
         </div>
     </nav>
-    <div class="">
+    
+    <main class="container">
         {%block content%}{%endblock content%}
-    </div>
+    </main>
+
+    <footer class=" bg-nav p-2 bottom-0 left-0 right-0 fixed h-fit  ">
+            <div class="first-row container mx-auto flex flex-wrap  items-center justify-center  ">
+                <div class="butt p-2 mr-2 text-2xl font-semibold hover:text-button_hover" >
+                    <a href='{{url_for("pages.home")}}'> Xpanses </a>
+                </div>
+                <div class="links text-xl font-semibold  ">
+                    <a class="px-4 text-link  hover:text-opacity-40 " href="#">Contact</a>
+                    <a class="px-4 text-link  hover:text-opacity-70 " href="#">FAQ</a>
+                    <a class="px-4 text-link  hover:text-opacity-70 " href="#">Privacy</a>
+                </div>
+            </div>
+            <div class="second-row container mx-auto flex justify-center   ">
+                <a class="px-4" href='https://github.com/Amine-iD/Expanses-Tracker'>
+                    <i class="fa-brands fa-github  text-2xl hover:text-link"> </i>
+                </a>
+                <a class="px-4"  href="https://linkedin.com">
+                    <i class="fa-brands fa-linkedin text-2xl hover:text-link"></i>
+                </a>
+                <a class="px-4" href="https://x.com">
+                    <i class="fa-brands fa-x-twitter text-2xl hover:text-link"></i>
+                </a>
+            </div>
+    </footer>
 
 </body>
 </html>
