@@ -1,0 +1,25 @@
+{%extends 'base.html'%}
+<head>
+    {%block title%} Register {%endblock title%}
+    <link rel="stylesheet" href="../style/style.css">
+</head>
+{%block content%}
+<div class=" flex items-center justify-center mt-5 bg-button ">
+    <div class="bg-nav ">
+        <form method="post" action="" class="w-3/4">
+            {{form.hidden_tag()}}
+            
+                {{form.user_name(placeholder='Name:' , class= 'p-2' )}}
+            <br>
+                {{form.email(placeholder = 'Email' , class= 'p-2' )}}
+            <br>
+                {{form.password1(placeholder = 'Password' , class= 'p-2' )}}
+            <br>
+                {{form.password2(placeholder = 'Confirm Password' ,  class= 'p-2' )}}
+            <br>
+            {{form.submit( class='cursor-pointer')}}
+        </form>    
+
+    </div>
+</div>
+{%endblock content%}
