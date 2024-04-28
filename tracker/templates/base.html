@@ -15,16 +15,19 @@
                 <a class="text-3xl font-semibold  text-link hover:text-button "  href="#">Xpanses</a>
             </div>
             <div class="space-x-8 text-xl ">
+                <!-- Why the url_for uses pages.<functionName> and not routes. ... even if the pythin module is named routes ?? -->
                     <a class="text-link  hover:text-opacity-70" href='{{url_for("pages.home")}}'>Home</a>
                     <a class="text-link  hover:text-opacity-70"  href='#'>Add Expanses</a>
                     <a class="text-link  hover:text-opacity-70"  href='{{url_for("pages.about")}}'>About</a>
             </div>
             <div class="bg-button py-1 px-4 rounded-md  ">
-                <button class="text-lg font-semibold text-link  ">Login</button>
+                <button class="text-lg font-semibold text-link" >
+                <a href="{{url_for('pages.register')}}">Login</a>    
+                </button>
             </div>
         </div>
     </nav>
-    <main class="container flex w-full h-screen  mt-2 mx-auto justify-evenly items-center">
+    <main class="container h-screen">
 {%block content%}{%endblock content%}
     </main>
     <!-- bottom-0 left-0 right-0 fixed -->
