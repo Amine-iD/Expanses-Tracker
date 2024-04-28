@@ -1,10 +1,10 @@
 from flask import Flask , current_app
 from flask_sqlalchemy import SQLAlchemy
-from tracker import routes
+from tracker.routes import bp
 
 def create_app():
     app = Flask(__name__)
-    app.register_blueprint(routes.bp)
+    app.register_blueprint(bp)
     return app
 
 app = create_app()

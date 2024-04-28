@@ -8,6 +8,7 @@ class User(db.Model):
     user_id = db.Column(db.Integer() , primary_key = True)
     user_name = db.Column(db.String(length = 20) , nullable = False , unique = True)
     email = db.Column(db.String() , nullable = False , unique = True)
+    password = db.Column(db.String(length = 50) , nullable = False )
     balances = db.relationship('Balance', backref = 'owner' , lazy = True) # different balances for diffrent months
 
 class Category(db.Model):
