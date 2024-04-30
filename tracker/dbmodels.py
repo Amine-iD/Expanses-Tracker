@@ -1,5 +1,5 @@
 from tracker import db 
-from tracker import app
+from tracker import app , bcrypte
 from datetime import datetime
 # from sqlalchemy import 
 
@@ -10,6 +10,16 @@ class User(db.Model):
     email = db.Column(db.String() , nullable = False , unique = True)
     password = db.Column(db.String(length = 50) , nullable = False )
     balances = db.relationship('Balance', backref = 'owner' , lazy = True) # different balances for diffrent months
+    # WE Will need to hash the password for security reasons
+
+    # Getter
+    @property
+    def get_password(self):
+        return self.password
+    # Setter
+    @get_password.setter
+    def get_password(self , plain_text_password):
+        self.password =  bcrypte.generate_password_hash(plain_text_password).decode('utf-8')
 
 class Category(db.Model):
     category_id = db.Column(db.Integer() , primary_key = True)

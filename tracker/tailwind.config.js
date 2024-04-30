@@ -12,5 +12,7 @@ module.exports = {
       button_hover:'#38a169'
     }
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 }
