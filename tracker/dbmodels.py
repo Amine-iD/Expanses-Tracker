@@ -1,14 +1,17 @@
-from tracker import app ,db , bcrypte , login_manager
+from tracker import app 
+from tracker import db 
+from tracker import  bcrypte 
+from tracker import  login_manager
 from datetime import datetime
 from flask_login import UserMixin 
 # from sqlalchemy import 
 # -------------------This is essential for flask-login to work properly
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(user_id)
+    return User.query.get(int(user_id))
 
-class User(db.Model ,UserMixin ):
-    user_id = db.Column(db.Integer() , primary_key = True)# it was called user_id, but load_user() calls the id attribute from the User class, and not the  user_id attribute
+class User(db.Model ,UserMixin):
+    id = db.Column(db.Integer() , primary_key = True)# it was called user_id, but load_user() calls the id attribute from the User class, and not the  user_id attribute
     user_name = db.Column(db.String(length = 20) , nullable = False , unique = True)
     email = db.Column(db.String() , nullable = False , unique = True)
     password = db.Column(db.String(length = 100) , nullable = False )
@@ -38,7 +41,7 @@ class Balance(db.Model):
     id = db.Column(db.Integer() , primary_key = True)
     amount = db.Column(db.Integer() , nullable = True)
     period = db.Column(db.String(length = 30) , nullable = False , unique = True) 
-    user_id = db.Column(db.Integer() , db.ForeignKey('user.user_id'))
+    user_id = db.Column(db.Integer() , db.ForeignKey('user.id'))
 
 class Item(db.Model):
     item_id = db.Column(db.Integer() , primary_key = True)
@@ -49,6 +52,5 @@ class Item(db.Model):
 # This is how we converted the classes into db tables and connected them to the db file. but we needed to run this 
 # file `dbmodels.py` seperately in order to do so.
 with app.app_context():
-    # db.drop_all()
     db.create_all()
     db.session.commit()
