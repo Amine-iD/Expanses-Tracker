@@ -6,19 +6,28 @@
 </head>
 
 {%block content%}
-    <div class="container flex items-center justify-center">
-        <form method="post">
-            {{form.hidden_tag()}}
-
-            <div>
-                {{form.user_name(placeholder = 'Enter Your Name:')}}
-            </div>
-            <br>
-            <div>
-                {{form.password(placeholder = ' Enter Your Password')}}
-            </div>
-            
-                {{form.submit()}}
+    <div class="form-container container my-10  ">
+        <form method="post" >
+            {{form.csrf_token}}
+            <div class="container flex flex-col items-center ">
+                    <div class="field-container">
+                        {{form.user_name.label()}} <!--the label name is extracted from forms.py in the user_name variable of the Login class-->
+                        {{form.user_name(placeholder = 'Enter Your Name:' , class = 'input')}}
+                    </div>
+                    <br>
+                    <div class="field-container">
+                        {{form.password.label()}}
+                        {{form.password(placeholder = ' Enter Your Password', class = 'input' )}}
+                    </div>
+                    <br>
+                    <div class="field-container">
+                        {{form.submit(class = 'btn')}}
+                    </div>
+                    <div class="form-links">
+                        <span>Don't have an account?</span>
+                        <span> <a href="{{url_for('routes.register')}}">  Register  </a> </span>
+                    </div>
+                </div>
         </form>
-        </div>
+    </div>
 {%endblock content%}

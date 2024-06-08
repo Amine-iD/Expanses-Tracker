@@ -4,22 +4,44 @@
     <link rel="stylesheet" href="../style/style.css">
 </head>
 {%block content%}
-<div class=" flex items-center justify-center mt-5 bg-button ">
-    <div class="bg-nav ">
-        <form method="post" action="" class="w-3/4">
-            {{form.hidden_tag()}}
-            
-                {{form.user_name(placeholder='Name:' , class= 'p-2' )}}
-            <br>
-                {{form.email(placeholder = 'Email' , class= 'p-2' )}}
-            <br>
-                {{form.password1(placeholder = 'Password' , class= 'p-2' )}}
-            <br>
-                {{form.password2(placeholder = 'Confirm Password' ,  class= 'p-2' )}}
-            <br>
-            {{form.submit( class='cursor-pointer')}}
+    <div class="form-container container my-10 ">
+        <form method="post" action="" >
+                {{form.csrf_token}}
+            <div class="container flex flex-col items-center  ">
+                <div class="field-container">
+                    {{form.user_name.label()}}
+                    {{form.user_name( class = 'input')}}
+                </div>
+                <br>
+                
+                <div class="field-container">
+                    {{form.email.label()}}
+                    {{form.email( class = 'input')}}
+                </div>
+                <br>
+                
+                <div class="field-container">
+                    {{form.password1.label()}}
+                    {{form.password1(class = 'input' )}}
+                </div>
+                <br>
+                
+                <div class="field-container">
+                    {{form.password2.label()}}
+                    {{form.password2(class = 'input' )}}
+                </div>
+                <br>
+                
+                <div class="field-container">
+                {{form.submit( class='btn')}}
+                </div>
+                <br>
+                <div class="form-links">
+                    <span> Already have an account?</span>
+                    <span> <a href="{{url_for('routes.login')}}"> Login  </a></span>
+                </div>      
+            </div>
         </form>    
 
     </div>
-</div>
 {%endblock content%}

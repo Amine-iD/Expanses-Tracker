@@ -1,21 +1,20 @@
-from tracker import app 
-from tracker import db 
-from tracker import  bcrypte 
-from tracker import  login_manager
+from tracker import app, db, bcrypte, login_manager
 from datetime import datetime
 from flask_login import UserMixin 
 # from sqlalchemy import 
 # -------------------This is essential for flask-login to work properly
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
+
 
 class User(db.Model ,UserMixin):
+    """I will try to implement the UserMixin properties manually without inheriting them"""
     id = db.Column(db.Integer() , primary_key = True)# it was called user_id, but load_user() calls the id attribute from the User class, and not the  user_id attribute
     user_name = db.Column(db.String(length = 20) , nullable = False , unique = True)
     email = db.Column(db.String() , nullable = False , unique = True)
     password = db.Column(db.String(length = 100) , nullable = False )
     balances = db.relationship('Balance', backref = 'owner' , lazy = True) # different balances for diffrent months
+
+    def __repr__(self) -> str:
+        return self.user_name #This is what displays the real value of the class User , if it's not written , all we get is <User 1or2>
     # WE Will need to hash the password for security reasons
 
     # Getter
@@ -30,6 +29,10 @@ class User(db.Model ,UserMixin):
     def check_password(self , attempted_password):
         return bcrypte.check_password_hash(self.password ,attempted_password) # returns True if they are equal
 
+with app.app_context():
+    @login_manager.user_loader
+    def load_user(user):
+        return User.query.get(user)
 
 
 class Category(db.Model):

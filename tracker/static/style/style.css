@@ -1,0 +1,28 @@
+.field-container{
+	display:flex;
+	flex-direction: column;
+	width: 40%;	
+}
+
+.input{
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-sizing: border-box;
+}
+.btn{
+	padding: 10px 20px;
+	background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+	color: #fff;
+	font-size: large;
+	width: 100%;
+	cursor: pointer;
+	border-radius: 5px;
+}
+.btn:hover{
+	background-color: rgb(37 99 235 / var(--tw-bg-opacity));
+
+}

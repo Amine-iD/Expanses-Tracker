@@ -1,13 +1,20 @@
 from flask import Blueprint , render_template , redirect , url_for ,flash
 from tracker.forms import Register , Login
-# from tracker.dbmodels import User
-from flask_login import login_user
+from flask_login import login_user , logout_user , login_required
 
-bp = Blueprint('pages' , __name__)
+bp = Blueprint('routes' , __name__)    
+
 
 @bp.route('/')
+@bp.route('/home')
 def home():
-    return render_template('home.html')
+    return render_template("home.html")
+
+@bp.route('/dashboard')
+@login_required
+def dashboard():
+    return render_template("dashboard.html")
+
 
 @bp.route('/about')
 def about():
@@ -26,7 +33,7 @@ def register():
         with app.app_context():
             db.session.add(user_to_create)
             db.session.commit()
-        return redirect(url_for("pages.home"))
+        return redirect(url_for("routes.home"))
     # We need to check if the user entered the data in the correct way as it was mentioned in the validators
     if form.errors:
         for err in form.errors.values():
@@ -47,21 +54,20 @@ def login():
         if attempted_user and attempted_user.check_password(attempted_password=form.password.data):
             login_user(attempted_user)
             flash("You are successfully logged in!",category='success')
-            flash(attempted_user.password)
-            return redirect(url_for('pages.home'))
+            return redirect(url_for('routes.dashboard'))
 
         else:
             flash('Log in Error',category='danger')
         
-        return redirect(url_for("pages.about"))    
+        return redirect(url_for("routes.home"))    
     return render_template('login.html' , form = form)
 
+@bp.route('/logout')
+def logout():
+    logout_user()
+    flash("You are currently logged out")
+    return render_template('home.html')
 
 
 
 
-
-
-"""
-need to SOLVE THE USER() ID ATTRIBUTE (MEANING COLUMN) , AND FOR THAT I NEED TO SOLVE THE IMPORT TRACKER ISSUE !!
-"""

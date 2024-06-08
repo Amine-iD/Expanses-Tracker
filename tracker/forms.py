@@ -15,16 +15,16 @@ class Register(FlaskForm):
           if email:
                 raise ValidationError("Email adress already exists! Please try a different one ")
     
-    user_name = StringField(label='User Name' , validators = [Length(min=5 , max=15) , DataRequired()])
-    email = EmailField(label = 'Email' , validators = [Length(min=6 , max=25) , Email()])
-    password1 = PasswordField(label='Password' , validators = [Length(min=7) , DataRequired()])
-    password2 = PasswordField(label='Confirm Password', validators = [EqualTo('password1') , DataRequired()])
+    user_name = StringField(label='User Name :' , validators = [Length(min=5 , max=15) , DataRequired()])
+    email = EmailField(label = 'Email :' , validators = [Length(min=6 , max=25) , Email()])
+    password1 = PasswordField(label='Password :' , validators = [Length(min=7) , DataRequired()])
+    password2 = PasswordField(label='Confirm Password :', validators = [EqualTo('password1') , DataRequired()])
     submit = SubmitField(label='Create Account')
 
 class Login(FlaskForm):
     
-    user_name = StringField(label='User Name' , validators = [Length(min=5 , max=15) , DataRequired()])
-    password = PasswordField(label='Password' , validators = [Length(min=7) , DataRequired()])
+    user_name = StringField(label='Name :' , validators = [Length(min=5 , max=15) , DataRequired()])
+    password = PasswordField(label='Password :' , validators = [Length(min=7) , DataRequired()])
     submit = SubmitField(label='Login')
     
 

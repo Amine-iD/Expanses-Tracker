@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xpanses :{%block title%}{%endblock title%}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='./dist/output.css')}}">
+    <link rel="stylesheet" href="{{url_for('static' , filename = './style/style.css')}}">
     <script src="https://kit.fontawesome.com/85d4076826.js" crossorigin="anonymous"></script>
 
 </head>
@@ -15,16 +16,27 @@
                 <a class="text-3xl font-semibold  text-link hover:text-button "  href="#">Xpanses</a>
             </div>
             <div class="space-x-8 text-xl ">
-                <!-- Why the url_for uses pages.<functionName> and not routes. ... even if the pythin module is named routes ?? -->
-                    <a class="text-link  hover:text-opacity-70" href='{{url_for("pages.home")}}'>Home</a>
+                    <a class="text-link  hover:text-opacity-70" href='{{url_for("routes.home")}}'>Home</a>
                     <a class="text-link  hover:text-opacity-70"  href='#'>Add Expanses</a>
-                    <a class="text-link  hover:text-opacity-70"  href='{{url_for("pages.about")}}'>About</a>
+                    <a class="text-link  hover:text-opacity-70"  href='{{url_for("routes.dashboard")}}'>DashBoard</a>
             </div>
-            <div class="bg-button py-1 px-4 rounded-md  ">
-                <button class="text-lg font-semibold text-link" >
-                <a href="{{url_for('pages.login')}}">Login</a>    
-                </button>
-            </div>
+            {%if current_user.is_authenticated %}
+                <p>Welcome {{current_user}}</p>
+                <div class="bg-button_hover py-1 px-4 rounded-md  ">
+                    <button class="text-lg font-semibold text-link" >
+                    <a href="{{url_for('routes.logout')}}">Logout</a>    
+                    </button>
+                </div>
+        
+            {%else %}
+                <div class="bg-button py-1 px-4 rounded-md  ">
+                    <button class="text-lg font-semibold text-link" >
+                    <a href="{{url_for('routes.login')}}">Login</a>    
+                    </button>
+                </div>
+            
+            
+            {%endif%}
         </div>
     </nav>
     <header>
@@ -50,7 +62,7 @@
     <footer class=" bg-nav p-2 h-fit">  
             <div class="first-row container mx-auto flex flex-wrap  items-center justify-center  ">
                 <div class="butt p-2 mr-2 text-2xl font-semibold hover:text-button_hover" >
-                    <a href='{{url_for("pages.home")}}'> Xpanses </a>
+                    <a href='{{url_for("routes.home")}}'> Xpanses </a>
                 </div>
                 <div class="links text-xl font-semibold  ">
                     <a class="px-4 text-link  hover:text-opacity-40 " href="#">Contact</a>
