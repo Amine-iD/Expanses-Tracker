@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm 
-from wtforms import StringField , PasswordField , EmailField , SubmitField,ValidationError
+from wtforms import StringField , PasswordField , EmailField , SubmitField,ValidationError 
 from wtforms.validators import DataRequired , Length , Email ,EqualTo
 
 class Register(FlaskForm):    
@@ -27,4 +27,15 @@ class Login(FlaskForm):
     password = PasswordField(label='Password :' , validators = [Length(min=7) , DataRequired()])
     submit = SubmitField(label='Login')
     
+class AddCategory(FlaskForm):
+    def validate_category_name(self , category_to_check):
+        from tracker.dbmodels import Category
+        category = Category.query.filter_by(category_name = category_to_check.data).first()
+        if category:
+             raise ValidationError('Category already exists!')     
+    
+    category_name = StringField(label='Category' , validators=[DataRequired()])
+    submit = SubmitField(label='Add Category') 
 
+class DeleteCategory(FlaskForm):
+     ...

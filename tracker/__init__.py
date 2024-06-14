@@ -1,18 +1,29 @@
+import os
 from flask import Flask , current_app
-from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy 
+from sqlalchemy import create_engine
+# from flask_migrate import Migrate
 from tracker.routes import bp
 from flask_bcrypt import Bcrypt as Bcr
 from flask_login import LoginManager , login_user
+from dotenv import load_dotenv
+
+
+db = SQLAlchemy()
+bcrypte = Bcr()
+login_manager = LoginManager()
+
+load_dotenv(rf'C:\Users\amine\to unpack\WebDev\Expanses-Tracker\.env')
 
 def create_app():
     app = Flask(__name__)
     app.register_blueprint(bp)
+    bcrypte.init_app(app)
+    login_manager.init_app(app)
+    app.config.from_prefixed_env()
+    # app.config.from_prefixed_env('SQLALCHEMY')
+    # os.getenv('SQLALCHEMY_DATABASE_URI')
+    db.init_app(app)
     return app
 
-app = create_app()
-bcrypte = Bcr(app)
-login_manager = LoginManager(app)
-# login_manager.init_app(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tracker.db' 
-app.config['SECRET_KEY'] = 'b9212131a5fe1e1345346de59f1cab71c17941e23fb166dc52ba162a3ca78c2e'
-db = SQLAlchemy(app)
+

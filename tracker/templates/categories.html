@@ -1,0 +1,65 @@
+{%extends 'base.html'%}
+{%block title%} Categories  {%endblock%}
+{%block content%}
+
+<div class="container form-container my-10">
+    <!-- Add a category -->
+    <form action="" method="post" class="">
+        {{form.csrf_token}}
+        <div class="container flex flex-col items-center  ">
+            <div class="field-container">
+                {{form.category_name.label()}}
+                {{form.category_name(placeholder = 'ex:Clothing',class = 'input')}}
+            </div>
+            <div class="field-container">
+                {{form.submit(class = 'btn' , id = 'btn')}}
+            </div>
+        </div>
+    </form>
+</div>
+<br>
+<hr>
+<br> <br>
+<!-- Display all categories  -->
+<div class="container mx-auto w-2/5  max-h-80  border-solid border-2 border-green-300 rounded-md flex items-center  justify-between flex-wrap overflow-y-scroll  ">
+        {%for category in categories%}
+            <div class=" category  m-1 p-1 h-1/2  border-solid border-2 rounded-lg items-center bg-gray-200  ">
+                <p id="delete-category">{{category}}</p>
+                <button  onclick="deleteCategory()">del</button>
+            </div>
+        {%endfor%}
+</div>
+<!-- Add expnses as rows -->
+<div class="container ">
+    <div class="table-container">
+        <table class="exp-table" id="expansesTable ">
+            <thead class="table-header-group">
+                <tr class="header">
+                    <th>Description</th> 
+                    <th>Item</th> 
+                    <th>Category</th> 
+                    <th>Date</th>
+                </tr>   
+            </thead> 
+            <tbody id="tbody">
+
+            </tbody>
+        </table>
+    </div>
+    <div class="table-btns container w-2/5 flex ">
+        <button class="btn mr-5 " onclick="addRow()">New row</button>
+        <button class="btn mr-5 " onclick="deleteRow()">Delete row</button>
+        <button class="btn mr-5 ">Save</button>
+
+    </div>
+</div>
+
+<script src="../static/index.js"></script>
+<script>
+    // VARIABLES
+    let items = JSON.stringify({{items | tojson}})
+    let categories = JSON.stringify({{categories | tojson}})
+    loadData(items , categories)
+    
+</script>
+{%endblock content%}
