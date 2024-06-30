@@ -1,6 +1,7 @@
 from tracker import create_app, db, bcrypte, login_manager
 from datetime import datetime
 from flask_login import UserMixin 
+from datetime import datetime
 # from sqlalchemy import 
 # -------------------This is essential for flask-login to work properly
 
@@ -52,7 +53,8 @@ class Item(db.Model):
     item_id = db.Column(db.Integer() , primary_key = True)
     item_name = db.Column(db.String(length = 50) , nullable = False , unique = True)
     item_category = db.Column(db.String() , db.ForeignKey('category.category_id'))
-    amount = db.Column(db.Integer)  
+    amount = db.Column(db.Integer()) 
+    created_at = db.Column(db.DateTime, default=datetime.now())
 
 class Service(db.Model):
     __tablename__ = 'service'

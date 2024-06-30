@@ -2,57 +2,69 @@
 {%block title%} Categories  {%endblock%}
 {%block content%}
 
-<div class="container form-container my-10">
+<div class="container form-container my-10 flex flex-row ">
     <!-- Add a category -->
-    <form action="" method="post" class="">
-        {{form.csrf_token}}
-        <div class="container flex flex-col items-center  ">
-            <div class="field-container">
-                {{form.category_name.label()}}
-                {{form.category_name(placeholder = 'ex:Clothing',class = 'input')}}
+    <div class="categories-form w-1/2 ">
+        <form action="" method="post" class="">
+            {{form.csrf_token}}
+            <div class="container flex flex-col items-center  ">
+                <div class="field-container">
+                    {{form.category_name.label()}}
+                    {{form.category_name(placeholder = 'ex:Clothing', class = 'input')}}
+                </div>
+                <div class="field-container">
+                    {{form.submit(class = 'btn' , id = 'btn')}}
+                </div>
             </div>
-            <div class="field-container">
-                {{form.submit(class = 'btn' , id = 'btn')}}
+        </form>
+    </div>
+    <div class="item-form w-1/2">
+        <form action="" method="post" class="">
+            {{form.csrf_token}}
+            <div class="container flex flex-col items-center  ">
+                <div class="field-container">
+                    {{form.category_name.label()}}
+                    {{form.category_name(placeholder = 'ex:Clothing', class = 'input')}}
+                </div>
+                <div class="field-container">
+                    {{form.submit(class = 'btn' , id = 'btn')}}
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
 <br>
 <hr>
 <br> <br>
-<!-- Display all categories  -->
-<div class="container mx-auto w-2/5  max-h-80  border-solid border-2 border-green-300 rounded-md flex items-center  justify-between flex-wrap overflow-y-scroll  ">
-        {%for category in categories%}
-            <div class=" category  m-1 p-1 h-1/2  border-solid border-2 rounded-lg items-center bg-gray-200  ">
-                <p id="delete-category">{{category}}</p>
-                <button  onclick="deleteCategory()">del</button>
-            </div>
-        {%endfor%}
-</div>
 <!-- Add expnses as rows -->
-<div class="container ">
-    <div class="table-container">
-        <table class="exp-table" id="expansesTable ">
-            <thead class="table-header-group">
-                <tr class="header">
-                    <th>Description</th> 
-                    <th>Item</th> 
-                    <th>Category</th> 
-                    <th>Date</th>
-                </tr>   
-            </thead> 
-            <tbody id="tbody">
-
-            </tbody>
-        </table>
+    <div class="container mx-auto px-4 h-2/5">
+        <div class="table-btns flex w-full  ">
+            <button class=" bg-blue-500  hover:bg-blue-700  text-white font-bold  py-2 px-4 rounded-md" onclick="addRow()">New row</button>
+            <button class=" bg-red-500   hover:bg-red-700   text-white font-bold  py-2 px-4 rounded-md mx-2" onclick="deleteRow()">Delete row</button>
+            <button class=" bg-green-500 hover:bg-green-700 text-white font-bold  py-2 px-4 rounded-md ml-auto">Save</button>
+        </div>
+        <h1 class="text-2xl font-bold mb-4 text-center">Purchased Items</h1>
+        <div class="overflow-x-auto ">
+            <table class=" exp-table min-w-full bg-white border border-gray-200 h-1/2 overflow-y-scroll">
+                <thead>
+                    <tr class="hover:bg-gray-100">
+                        <th class="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-700">Description</th>
+                        <th class="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-700">Item</th>
+                        <th class="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-700">Category</th>
+                        <th class="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-700">Date</th>
+                    </tr>
+                </thead>
+                <tbody id="purchased-items-body">
+                    <!-- Rows will be added dynamically by JavaScript -->
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" class="py-2 px-4 border-t border-gray-200 text-right font-semibold">Total Items</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
-    <div class="table-btns container w-2/5 flex ">
-        <button class="btn mr-5 " onclick="addRow()">New row</button>
-        <button class="btn mr-5 " onclick="deleteRow()">Delete row</button>
-        <button class="btn mr-5 ">Save</button>
-
-    </div>
-</div>
 
 <script src="../static/index.js"></script>
 <script>
@@ -60,6 +72,5 @@
     let items = JSON.stringify({{items | tojson}})
     let categories = JSON.stringify({{categories | tojson}})
     loadData(items , categories)
-    
 </script>
 {%endblock content%}

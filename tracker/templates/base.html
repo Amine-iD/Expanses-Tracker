@@ -10,7 +10,7 @@
     <script src="../static/index.js"></script>
 
 </head>
-<body class="bg-body">
+<body class="bg-body min-h-screen flex flex-col">
     <nav class=" bg-nav p-4">
         <div class="container mx-auto flex items-center justify-between ">
             <div class="logo w-1/3">
@@ -69,7 +69,7 @@
         {%endwith%}
 
     </header>
-    <main class="container h-screen">
+    <main class="container  flex-grow">
 {%block content%}{%endblock content%}
     </main>
     <!-- bottom-0 left-0 right-0 fixed -->

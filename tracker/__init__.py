@@ -23,7 +23,13 @@ def create_app():
     app.config.from_prefixed_env()
     # app.config.from_prefixed_env('SQLALCHEMY')
     # os.getenv('SQLALCHEMY_DATABASE_URI')
-    db.init_app(app)
+    db.init_app(app) 
     return app
-
+"""
+This is how To delete data from the database:
+with app.app_context():
+...     toDel = Category.query.filter_by(category_name = 'Test').first()
+...     db.session.delete(toDel)
+...     db.session.commit()
+"""
 
