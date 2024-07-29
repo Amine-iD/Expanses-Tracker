@@ -40,14 +40,14 @@
     <div class="container mx-auto px-4 h-2/5">
         <div class="table-btns flex w-full  ">
             <button class=" bg-blue-500  hover:bg-blue-700  text-white font-bold  py-2 px-4 rounded-md" onclick="addRow()">New row</button>
-            <button class=" bg-red-500   hover:bg-red-700   text-white font-bold  py-2 px-4 rounded-md mx-2" onclick="deleteRow()">Delete row</button>
+            <button class=" bg-red-500   hover:bg-red-700   text-white font-bold  py-2 px-4 rounded-md mx-2" onclick="deleteRow()" id="deleteBtn">Delete row</button>
             <button class=" bg-green-500 hover:bg-green-700 text-white font-bold  py-2 px-4 rounded-md ml-auto">Save</button>
         </div>
         <h1 class="text-2xl font-bold mb-4 text-center">Purchased Items</h1>
         <div class="overflow-x-auto ">
             <table class=" exp-table min-w-full bg-white border border-gray-200 h-1/2 overflow-y-scroll">
                 <thead>
-                    <tr class="hover:bg-gray-100">
+                    <tr class="hover:bg-gray-200" onclick="selectRow()">
                         <th class="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-700">Description</th>
                         <th class="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-700">Item</th>
                         <th class="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-700">Category</th>

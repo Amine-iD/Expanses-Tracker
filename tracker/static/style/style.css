@@ -26,3 +26,6 @@
 	background-color: rgb(37 99 235 / var(--tw-bg-opacity));
 
 }
+.selected{
+	background-color: antiquewhite;
+}

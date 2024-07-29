@@ -18,19 +18,39 @@ function addRow(){
     const tbody = document.querySelector(".exp-table tbody")//when I did it using the id of the table it didn't stay working for too long!!
     // const tbody = document.querySelector('#expansesTable tbody')
     let tr = document.createElement('tr')
-    tr.className = 'hover:bg-gray-100'
+    tr.classList.add('hover:bg-gray-100','cursor-pointer')
     tr.innerHTML = newRow
+    tr.id = 'row'
     tbody.appendChild(tr)
     // $(".exp-table tbody").append(newRow)   !!!!!!!!!------This has a weird behaviour-------!!!!!!!!!!!
-}
-function selectRow(){
+
+    let table = document.querySelector('.exp-table')
+    let selected = null ;
+    table.addEventListener('click' , function(e){
+        if (selected) selected.classList.remove('selected'); // unselect any previously selected row
+        if (e.target.matches('textarea , input  , option , select')) 
+            return;
+        
+        let target = e.target.closest('tr')
+        if (target){
+            selected = target
+            selected.classList.add('selected')
+        }
+    })
+    // unselect the row once clicked outside of the table
+    document.addEventListener('click' , function(e){
+        if (!table.contains(e.target)){
+            if (selected){
+                selected.classList.remove('selected')
+                selected = null;
+            }
+        }
+    })
+    
 
 }
-
 
 function deleteRow(){
-    /** This is the simplest form of a delete() function , but it lacks precision=>{which row to delete!} */
-    let row = document.querySelector('tbody').lastChild
-    row.remove()
+   let selectedRow = document.querySelector('.selected')
+   if (selectedRow) selectedRow.remove();
 }
-
