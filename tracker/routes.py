@@ -25,11 +25,13 @@ def register():
     from tracker import create_app , db
     app = create_app()
     form = Register() # This allows us to make conditions upon the redirected template 
+    # If the submit btn of the form is clciked !
     if form.validate_on_submit():
         user_to_create = User(
             user_name = form.user_name.data,
             email = form.email.data,
             get_password = form.password1.data)
+        # Add the entered data from the Form to the Database and save
         with app.app_context():
             db.session.add(user_to_create)
             db.session.commit()

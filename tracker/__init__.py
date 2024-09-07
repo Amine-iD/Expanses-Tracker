@@ -2,7 +2,6 @@ import os
 from flask import Flask , current_app
 from flask_sqlalchemy import SQLAlchemy 
 from sqlalchemy import create_engine
-# from flask_migrate import Migrate
 from tracker.routes import bp
 from flask_bcrypt import Bcrypt as Bcr
 from flask_login import LoginManager , login_user

@@ -37,10 +37,11 @@ class User(db.Model ,UserMixin):
         return bcrypte.check_password_hash(self.password ,attempted_password) # returns True if they are equal
 
 class Balance(db.Model):
-    id = db.Column(db.Integer() , primary_key = True)
-    amount = db.Column(db.Integer() , nullable = True)
+    balance_id = db.Column(db.Integer() , primary_key = True)
+    balance_amount = db.Column(db.Integer() , nullable = True)
     period = db.Column(db.String(length = 30) , nullable = False , unique = True) 
     user_id = db.Column(db.Integer() , db.ForeignKey('user.id'))
+
 
 class Category(db.Model):
     category_id = db.Column(db.Integer() , primary_key = True)
@@ -53,9 +54,9 @@ class Item(db.Model):
     item_id = db.Column(db.Integer() , primary_key = True)
     item_name = db.Column(db.String(length = 50) , nullable = False , unique = True)
     item_category = db.Column(db.String() , db.ForeignKey('category.category_id'))
-    amount = db.Column(db.Integer()) 
+    price = db.Column(db.Integer()) 
     created_at = db.Column(db.DateTime, default=datetime.now())
-
+    
 class Service(db.Model):
     __tablename__ = 'service'
 
@@ -65,9 +66,9 @@ class Service(db.Model):
 
 # This is how we converted the classes into db tables and connected them to the db file. but we needed to run this 
 # file `dbmodels.py` seperately in order to do so.
-with app.app_context():
-    db.create_all()
-    db.session.commit()
+# with app.app_context():
+#     db.create_all()
+#     db.session.commit()
 
 # I will make items a little bit general , like sugars , veges, fruits etc...
 # And I will add a description to each purchase/Xpanse to describe it specifically
